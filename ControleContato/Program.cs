@@ -1,4 +1,5 @@
 using ControleContato.Data;
+using ControleContato.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("DataBase");
+builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
 builder.Services.AddEntityFrameworkSqlServer().AddDbContext<BancoContext>(options =>
     options.UseSqlServer(connectionString));
 
